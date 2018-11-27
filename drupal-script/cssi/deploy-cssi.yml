@@ -14,12 +14,10 @@
      - dbfile: "{{ site }}-{{ tier }}-db"
      - date: "{{ lookup('pipe', 'date +%Y%m%d-%H%M') }}"
      - sitecopy: "{{ site }}-site-{{ tier }}-copy"
-     - giturl: https://{{ gituser }}:{{ gitpassword }}@github.com/CBIIT/nci-cssi2
+     - giturl: https://github.com/CBIIT/nci-cssi2.git
      - gitroot: /local/drupal/gitsource/nci-cssi2
      - backups: /local/drupal/backups
      - drupaluser: drupal
-     - gituser: '{{ gituser }}'
-     - gitpassword: '{{ gitpassword }}' 
 
 
    tasks:
