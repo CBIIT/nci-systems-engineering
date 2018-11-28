@@ -14,7 +14,7 @@
      - dbfile: "{{ site }}-{{ tier }}-db"
      - date: "{{ lookup('pipe', 'date +%Y%m%d-%H%M') }}"
      - sitecopy: "{{ site }}-site-{{ tier }}-copy"
-     - giturl: https://github.com/CBIIT/nci-cssi2.git
+     - giturl: https://github.com/CBIIT/nci-cssi2
      - gitroot: /local/drupal/gitsource/nci-cssi2
      - backups: /local/drupal/backups
      - drupaluser: drupal
