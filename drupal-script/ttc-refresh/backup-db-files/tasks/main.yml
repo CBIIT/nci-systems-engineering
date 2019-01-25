@@ -3,9 +3,9 @@
 - include_vars: ../../vars.yml
 
 - name: echo Path
-  shell: echo $PATH
+  command: echo $PATH
   register: path
-  debug: msg="the path was {{ path.stdout }}"
+#  debug: msg="the path was {{ path.stdout }}"
 
 - name: Taking database dump of {{ sitename }} on {{ fhost }}
   shell: drush sql-dump --result-file={{ backup_directory }}/{{ backup_dbfile }}
