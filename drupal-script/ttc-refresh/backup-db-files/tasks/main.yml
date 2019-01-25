@@ -3,7 +3,7 @@
 - include_vars: ../../vars.yml
 
 - name: echo Path
-  command: echo $PATH
+  shell: echo $PATH
   register: path
   debug: msg="{{ path.stdout }}"
 
