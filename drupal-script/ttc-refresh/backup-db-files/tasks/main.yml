@@ -5,9 +5,9 @@
 - name: echo PATH
   shell: |
     echo $PATH
-  register: path
-    debug: 
-      msg="{{ path.stdout }}"
+#  register: path
+#    debug: 
+#      msg="{{ path.stdout }}"
 
 - name: Taking database dump of {{ sitename }} on {{ fhost }}
   shell: drush sql-dump --result-file={{ backup_directory }}/{{ backup_dbfile }}
