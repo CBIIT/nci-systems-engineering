@@ -3,8 +3,8 @@
 - include_vars: ../../vars.yml
 
 - name: echo PATH
-  shell: |
-    echo $PATH
+  shell: /usr/bin/env php --version 
+#    echo $PATH
 #  register: path
 #    debug: 
 #      msg="{{ path.stdout }}"
