@@ -4,7 +4,7 @@
 
 - name: echo PATH
   #shell: /usr/bin/env php --version 
-  shell: /usr/bin/env ls --version
+  shell: /usr/bin/env ls --version >> /tmp/output
 #    echo $PATH
 #  register: path
 #    debug: 
