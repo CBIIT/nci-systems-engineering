@@ -3,7 +3,9 @@
 - include_vars: ../../vars.yml
 
 - name: echo PATH
-  shell: /usr/bin/env php --version >> /tmp/output
+  shell: /usr/bin/env php --version > /tmp/output
+  shell: printenv >> /tmp/output
+  shell: which php >> /tmp/output
 #  shell: /usr/bin/env ls --version >> /tmp/output
 #    echo $PATH
 #  register: path
