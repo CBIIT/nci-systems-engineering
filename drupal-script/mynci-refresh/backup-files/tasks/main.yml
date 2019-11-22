@@ -7,6 +7,7 @@
   command: tar --exclude=settings.php -czvf {{ backup_directory }}/{{ backup_file }}  {{ sitename }}
   args: 
     chdir : "{{ drupalroot }}/../"
+  poll: 5
 
 - name: Change the permission on {{ backup_file }} to 0664
   file:
