@@ -7,4 +7,3 @@
   shell: drush sql-dump --result-file={{ backup_directory }}/{{ backup_dbfile }}
   args: 
     chdir: "{{ siteroot }}"
-  poll: 5
