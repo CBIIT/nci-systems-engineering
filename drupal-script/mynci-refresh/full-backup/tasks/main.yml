@@ -13,13 +13,14 @@
   archive:
     path: "{{ drupalroot }}"
     dest: "{{ backups }}/{{ sitecopy }}-{{ date }}.tgz"
-
+  poll: 5
 
 - name: Extract archive copy of {{ sitename }} from {{ fhost }} to {{ tier }}
   unarchive:
     src: "{{ backup_directory }}/{{ backup_file }}"
     dest: "{{ drupalroot }}/../"
     remote_src: yes
+  poll: 5
   register: extract
 
 - debug: msg={{ extract }}
