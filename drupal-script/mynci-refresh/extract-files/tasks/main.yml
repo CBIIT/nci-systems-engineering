@@ -8,6 +8,7 @@
     dest: "{{ backups }}/{{ sitecopy }}-{{ date }}.tgz"
     owner: "{{ drupaluser }}"
     mode: 0644
+  poll: 5
   
 - name: Extract archive copy of {{ sitename }} from {{ fhost }} to {{ tier }}
   unarchive:
@@ -15,6 +16,7 @@
     dest: "{{ drupalroot }}/../"
     remote_src: yes
   register: extract
+  poll: 5
 
 - debug: msg={{ extract }}
 
