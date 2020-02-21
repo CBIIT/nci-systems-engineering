@@ -28,8 +28,8 @@
 
    tasks:
 
-     - name: Find all the files in backups directory that are older than 30 days and delete them
-       command: find /local/drupal/backups -mindepth 1 -mtime +30 -exec rm -rf {} \;
+     - name: Find all the files in backups directory that are older than 20 days and delete them
+       command: find /local/drupal/backups -mindepth 1 -mtime +20 -exec rm -rf {} \;
   
      - name: Take sql dump of {{ tier }} database.
        shell: 
@@ -40,6 +40,13 @@
        shell: 
          cmd: tar -czvf {{ backups }}/{{ sitecopy }}-{{ date }}.tgz mynci
          chdir: "{{ drupalroot }}/../"
+
+     - name: Change ownership of {{ backups }} dir
+       file:
+         owner: "{{ drupaluser }}"
+         group: "{{ drupaluser }}"
+         path: "{{ backups }}"
+         recurse: yes
 
      - name: Sanitize the local git directory
        file:
