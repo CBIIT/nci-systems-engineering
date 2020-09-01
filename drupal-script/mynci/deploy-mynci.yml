@@ -107,6 +107,7 @@
          
      - name: Clear drush cache
        shell:
-         cmd: /local/drupal/bin/drush cc all
+         #cmd: /local/drupal/bin/drush cc all
+         cmd: /usr/local/bin/drush cc all
          chdir: "{{ siteroot }}"
      
