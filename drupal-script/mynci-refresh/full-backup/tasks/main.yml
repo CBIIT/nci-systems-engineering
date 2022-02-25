@@ -32,8 +32,8 @@
 - name: Import {{ sitename }} {{ fhost }} database to {{ tier }}
   shell: 
     cmd: cd {{ siteroot }} && drush sql-cli < {{ backup_directory }}/{{ backup_dbfile }}
-  register: import
-- debug: msg={{ import }}
+  register: refresh
+- debug: msg={{ refresh }}
 
 - name: Clear drush cache
   shell:
