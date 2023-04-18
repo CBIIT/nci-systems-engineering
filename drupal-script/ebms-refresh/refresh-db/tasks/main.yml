@@ -1,0 +1,10 @@
+---
+# tasks file for refresh-db
+
+- include_vars: ../../vars.yml
+
+- name: Taking database dump of {{ sitename }} {{ tier }}
+  shell: drush sql-dump | ssh {{ thost }} "cd {{ drupalroot }} && vendor/bin/drush sql:cli"
+
+- name: rsync the existing webdirectory against the target directory
+  shell: rsync -a --delete --exclude web/sites/default/settings.php web {{ thost }}:{{ drupalroot }}/
