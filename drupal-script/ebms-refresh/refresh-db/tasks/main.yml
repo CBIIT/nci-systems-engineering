@@ -7,7 +7,8 @@
 #  shell: drush sql-dump | ssh {{ thost }} "cd {{ drupalroot }} && vendor/bin/drush sql:cli"
 
 - name: Dud in fhost
-  shell: ssh -i {{ ssh_key }} {{ ssh_user}}:{{ fhost }} "touch test.dud"
+  debug: {{ ssh_key }}
+  #shell: ssh -i {{ ssh_key }} {{ ssh_user}}:{{ fhost }} "touch test.dud"
   #delegate_to: '{{ fhost }}'
 
 #- name: Transfer file from ServerA to ServerB
