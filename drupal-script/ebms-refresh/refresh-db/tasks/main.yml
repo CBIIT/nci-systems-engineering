@@ -10,12 +10,15 @@
   #shell: ssh -i {{ ssh_key }} {{ ssh_user}}:{{ fhost }} "touch test.dud"
   #delegate_to: '{{ fhost }}'
 
-- name: Transfer file from ServerA to ServerB
-  synchronize:
-    src: /home/ncidrupal/delete.dud
-    dest: /home/ncidrupal/delete.dud
-    rsync_opts: "-e ssh -p 22"
-  delegate_to: '{{ fhost }}'
+- name: Check the ssh env vars
+  debug: '{{ sshkey }}'
+
+#- name: Transfer file from ServerA to ServerB
+#  synchronize:
+#    src: /home/ncidrupal/delete.dud
+#    dest: /home/ncidrupal/delete.dud
+#    rsync_opts: "-e ssh -p 22"
+#  delegate_to: '{{ fhost }}'
 
 #- name: Rsync to thost
 #  shell: rsync -a delete.dud {{ thost }}:{{ drupalroot }}/
