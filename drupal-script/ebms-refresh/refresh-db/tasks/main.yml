@@ -12,11 +12,12 @@
     dest: '{{ temp_ssh_key.path }}'
 
 - name: SQL dump from {{ fhost }} to {{ thost }}
-  shell: 
-    cmd: drush sql:dump | ssh -i {{ temp_ssh_key.path }} -o StrictHostKeyChecking=no {{ sshuser }}@{{ thost }} "cd {{ drupalroot }} && dzdo drush sql:cli"
+  shell:
+    cmd: ls -ltr | ssh -i {{ temp_ssh_key.path }} -o StrictHostKeyChecking=no {{ sshuser }}@{{ thost }} "cd {{ drupalroot }} && dzdo xargs -I testing.dud touch testing.dud"
+    #cmd: drush sql:dump | ssh -i {{ temp_ssh_key.path }} -o StrictHostKeyChecking=no {{ sshuser }}@{{ thost }} "cd {{ drupalroot }} && dzdo drush sql:cli"
     chdir: '{{ drupalroot }}'
 
-- name: Rsync webserver from {{ fhost }} to {{ thost }}
-  shell: 
-    cmd: rsync -a --delete -e "ssh -i {{ temp_ssh_key.path }}" --exclude web/sites/default/settings.php web {{ sshuser }}@{{ thost }}:{{ drupalroot }}/ --rsync-path="dzdo rsync"
-    chdir: '{{ drupalroot }}'
+#- name: Rsync webserver from {{ fhost }} to {{ thost }}
+#  shell: 
+#    cmd: rsync -a --delete -e "ssh -i {{ temp_ssh_key.path }}" --exclude web/sites/default/settings.php web {{ sshuser }}@{{ thost }}:{{ drupalroot }}/ --rsync-path="dzdo rsync"
+#    chdir: '{{ drupalroot }}'
