@@ -1,8 +1,8 @@
-- name: ssh test
-  hosts: localhost
-  tasks:
-    - name: ssh
-      shell: ssh -i {{ sshkey }} {{ sshuser }}@{{ fhost }} "touch ssh_test.dud"
+#- name: ssh test
+#  hosts: localhost
+#  tasks:
+#    - name: ssh
+#      shell: ssh -i {{ sshkey }} {{ sshuser }}@{{ fhost }} "touch ssh_test.dud"
 
 - name: Refresh Target Server
   hosts: '{{ thost }}'
@@ -10,5 +10,7 @@
   become_user: root
   become_method: dzdo
   gather_facts: yes
+  vars:
+     jenkins_key: "{{ lookup('file', {{ sshkey }}) }}"
   roles:
    - refresh-db
