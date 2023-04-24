@@ -1,9 +1,3 @@
-#- name: ssh test
-#  hosts: localhost
-#  tasks:
-#    - name: ssh
-#      shell: ssh -i {{ sshkey }} {{ sshuser }}@{{ fhost }} "touch ssh_test.dud"
-
 - name: Refresh Target Server
   hosts: '{{ fhost }}'
   become: yes

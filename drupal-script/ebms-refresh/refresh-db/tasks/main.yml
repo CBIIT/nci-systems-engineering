@@ -1,10 +1,6 @@
 ---
 # tasks file for refresh-db
-
 - include_vars: ../../vars.yml
-
-#- name: Taking database dump of {{ sitename }} {{ tier }}
-#  shell: drush sql-dump | ssh {{ thost }} "cd {{ drupalroot }} && vendor/bin/drush sql:cli"
 
 - tempfile:
     state:  file
@@ -15,19 +11,12 @@
     src: '{{ sshkey }}'
     dest: '{{ temp_ssh_key.path }}'
 
-#- name: Copy file with owner and permissions
-#  copy:
-#    src: '{{ sshkey }}'
-#    dest: temp.key
-#    state: present
+- name: SQL dump from {{ fhost }} to {{ thost }}
+  shell: 
+    cmd: drush sql:dump | ssh -i {{ temp_ssh_key.path }} -o StrictHostKeyChecking=no {{ sshuser }}@{{ thost }} "cd {{ drupalroot }} && drush sql:cli"
+    chdir: '{{ drupalroot }}'
 
-#- name: Dud in fhost
-#  shell: touch fhost.dud
-
-- name: Dud in thost
-  shell: ssh -i {{ temp_ssh_key.path }} -o StrictHostKeyChecking=no {{ sshuser }}@{{ thost }} "touch thost.dud"
-
-- name: Rsync to thost
-  shell: rsync -a --delete -e "ssh -i {{ temp_ssh_key.path }}" testing.dud {{ sshuser }}@{{ thost }}:{{ drupalroot }}/ --rsync-path="dzdo rsync"
-#- name: rsync the existing webdirectory against the target directory
-#  shell: rsync -a --delete --exclude web/sites/default/settings.php web {{ thost }}:{{ drupalroot }}/
+- name: Rsync webserver from {{ fhost }} to {{ thost }}
+  shell: 
+    cmd: rsync -a --delete -e "ssh -i {{ temp_ssh_key.path }}" --exclude web/sites/default/settings.php web {{ sshuser }}@{{ thost }}:{{ drupalroot }}/ --rsync-path="dzdo rsync"
+    chdir: '{{ drupalroot }}'
