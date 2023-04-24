@@ -13,7 +13,7 @@
 
 - name: SQL dump from {{ fhost }} to {{ thost }}
   shell: 
-    cmd: drush sql:dump | ssh -i {{ temp_ssh_key.path }} -o StrictHostKeyChecking=no {{ sshuser }}@{{ thost }} "cd {{ drupalroot }} && drush sql:cli"
+    cmd: drush sql:dump | ssh -i {{ temp_ssh_key.path }} -o StrictHostKeyChecking=no {{ sshuser }}@{{ thost }} "cd {{ drupalroot }} && dzdo drush sql:cli"
     chdir: '{{ drupalroot }}'
 
 - name: Rsync webserver from {{ fhost }} to {{ thost }}
