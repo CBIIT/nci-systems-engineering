@@ -11,6 +11,6 @@
   become_method: dzdo
   gather_facts: yes
   vars:
-     jenkins_key: "{{ lookup('file', {{ sshkey }}) }}"
+     jenkins_key: "{{ lookup('file', sshkey) }}"
   roles:
    - refresh-db
