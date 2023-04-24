@@ -1,5 +1,5 @@
 - name: Refresh Target Server
-  hosts: '{{ fhost }}'
+  hosts: localhost
   become: yes
   become_user: root
   become_method: dzdo

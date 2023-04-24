@@ -7,10 +7,10 @@
 #  shell: drush sql-dump | ssh {{ thost }} "cd {{ drupalroot }} && vendor/bin/drush sql:cli"
 
 - name: Dud in fhost
-  shell: touch delete.dud
+  shell: ssh {{ fhost }} "touch delete.dud"
 
-- name: Rsync to thost
-  shell: rsync -a delete.dud {{ thost }}:{{ drupalroot }}/
+#- name: Rsync to thost
+#  shell: rsync -a delete.dud {{ thost }}:{{ drupalroot }}/
 
 #- name: rsync the existing webdirectory against the target directory
 #  shell: rsync -a --delete --exclude web/sites/default/settings.php web {{ thost }}:{{ drupalroot }}/
