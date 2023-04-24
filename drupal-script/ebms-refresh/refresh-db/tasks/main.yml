@@ -10,9 +10,10 @@
   copy:
     src: '{{ sshkey }}'
     dest: temp.key
+    state: present
 
 - name: Dud in fhost
-  shell: ssh -i temp.key {{ sshuser }}:{{ fhost }} "touch test.dud"
+  shell: ssh -i temp.key {{ sshuser }}@{{ fhost }} "touch test.dud"
 
 #- name: Check the ssh env vars
 #  debug: '{{ sshuser }}'
