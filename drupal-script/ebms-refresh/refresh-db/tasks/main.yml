@@ -7,8 +7,8 @@
 #  shell: drush sql-dump | ssh {{ thost }} "cd {{ drupalroot }} && vendor/bin/drush sql:cli"
 
 - name: Dud in fhost
-  shell: touch delete.dud
-  delegate_to: '{{ fhost }}'
+  shell: ssh {{ fhost }} "touch delete.dud"
+  #delegate_to: '{{ fhost }}'
 
 #- name: Rsync to thost
 #  shell: rsync -a delete.dud {{ thost }}:{{ drupalroot }}/
