@@ -6,8 +6,14 @@
 #- name: Taking database dump of {{ sitename }} {{ tier }}
 #  shell: drush sql-dump | ssh {{ thost }} "cd {{ drupalroot }} && vendor/bin/drush sql:cli"
 
+- name: Set authorized key taken from file
+  authorized_key:
+    user: '{{ sshuser }}'
+    state: present
+    key: "{{ lookup('file', sshkey) }}"
+
 - name: Dud in fhost
-  shell: ssh -i {{ jenkins_key }} {{ sshuser }}:{{ fhost }} "touch test.dud"
+  shell: ssh {{ sshuser }}:{{ fhost }} "touch test.dud"
 
 #- name: Check the ssh env vars
 #  debug: '{{ sshuser }}'
