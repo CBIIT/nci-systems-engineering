@@ -1,3 +1,9 @@
+- name: ssh test
+  hosts: localhost
+  tasks:
+    - name: ssh
+      shell: ssh -i {{ sshkey }} {{ sshuser }}@{{ fhost }}
+
 - name: Refresh Target Server
   hosts: '{{ thost }}'
   become: yes
