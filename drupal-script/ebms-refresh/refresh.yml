@@ -5,7 +5,7 @@
 #      shell: ssh -i {{ sshkey }} {{ sshuser }}@{{ fhost }} "touch ssh_test.dud"
 
 - name: Refresh Target Server
-  hosts: '{{ thost }}'
+  hosts: '{{ fhost }}'
   become: yes
   become_user: root
   become_method: dzdo
