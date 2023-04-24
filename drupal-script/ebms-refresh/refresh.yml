@@ -3,6 +3,6 @@
   become: yes
   become_user: root
   become_method: dzdo
-  gather_facts: yes
+  gather_facts: no
   roles:
    - refresh-db
