@@ -6,14 +6,23 @@
 #- name: Taking database dump of {{ sitename }} {{ tier }}
 #  shell: drush sql-dump | ssh {{ thost }} "cd {{ drupalroot }} && vendor/bin/drush sql:cli"
 
-- name: Copy file with owner and permissions
-  copy:
+- tempfile:
+    state:  file
+    suffix: key
+  register: temp_ssh_key
+
+- copy:
     src: '{{ sshkey }}'
-    dest: temp.key
-    state: present
+    dest: '{{ temp_ssh_key.path }}'
+
+#- name: Copy file with owner and permissions
+#  copy:
+#    src: '{{ sshkey }}'
+#    dest: temp.key
+#    state: present
 
 - name: Dud in fhost
-  shell: ssh -i temp.key ncidrupal@{{ fhost }} "touch test.dud"
+  shell: ssh -i {{ temp_ssh_key.path }} {{ sshuser }}@{{ fhost }} "touch test.dud"
 
 #- name: Check the ssh env vars
 #  debug: '{{ sshuser }}'
