@@ -6,9 +6,15 @@
 #- name: Taking database dump of {{ sitename }} {{ tier }}
 #  shell: drush sql-dump | ssh {{ thost }} "cd {{ drupalroot }} && vendor/bin/drush sql:cli"
 
-- name: Dud in fhost
-  shell: ssh {{ fhost }} "touch delete.dud"
+#- name: Dud in fhost
+#  shell: ssh {{ fhost }} "touch delete.dud"
   #delegate_to: '{{ fhost }}'
+
+- name: Transfer file from ServerA to ServerB
+  synchronize:
+    src: /home/ncidrupal/delete.dud
+    dest: /home/ncidrupal/delete.dud
+  delegate_to: '{{ fhost }}'
 
 #- name: Rsync to thost
 #  shell: rsync -a delete.dud {{ thost }}:{{ drupalroot }}/
