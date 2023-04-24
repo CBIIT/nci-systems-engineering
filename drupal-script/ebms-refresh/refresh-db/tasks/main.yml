@@ -38,7 +38,7 @@
 #  delegate_to: '{{ fhost }}'
 
 - name: Rsync to thost
-  shell: rsync -a --delete -e "ssh -i {{ temp_ssh_key.path }}" thost.dud {{ sshuser }}@{{ thost }}:{{ drupalroot }}/
+  shell: rsync -a --delete -e "ssh -i {{ temp_ssh_key.path }}" thost.dud {{ sshuser }}@{{ thost }}:/home/ncidrupal/
 
 #- name: rsync the existing webdirectory against the target directory
 #  shell: rsync -a --delete --exclude web/sites/default/settings.php web {{ thost }}:{{ drupalroot }}/
