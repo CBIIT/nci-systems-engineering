@@ -21,23 +21,13 @@
 #    dest: temp.key
 #    state: present
 
-- name: Dud in fhost
-  shell: touch fhost.dud
+#- name: Dud in fhost
+#  shell: touch fhost.dud
 
 - name: Dud in thost
   shell: ssh -i {{ temp_ssh_key.path }} -o StrictHostKeyChecking=no {{ sshuser }}@{{ thost }} "touch thost.dud"
 
-#- name: Check the ssh env vars
-#  debug: '{{ sshuser }}'
-
-#- name: Transfer file from ServerA to ServerB
-#  synchronize:
-#    src: /home/ncidrupal/delete.dud
-#    dest: /home/ncidrupal/delete.dud
-#    rsync_opts: "-e ssh -p 22"
-#  delegate_to: '{{ fhost }}'
-
 - name: Rsync to thost
-  shell: rsync -a --delete -e "ssh -i {{ temp_ssh_key.path }}" fhost.dud {{ sshuser }}@{{ thost }}:{{ drupalroot }}/ --rsync-path="dzdo rsync"
+  shell: rsync -a --delete -e "ssh -i {{ temp_ssh_key.path }}" testing.dud {{ sshuser }}@{{ thost }}:{{ drupalroot }}/ --rsync-path="dzdo rsync"
 #- name: rsync the existing webdirectory against the target directory
 #  shell: rsync -a --delete --exclude web/sites/default/settings.php web {{ thost }}:{{ drupalroot }}/
