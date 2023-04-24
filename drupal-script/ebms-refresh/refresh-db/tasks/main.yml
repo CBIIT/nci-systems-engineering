@@ -7,7 +7,7 @@
 #  shell: drush sql-dump | ssh {{ thost }} "cd {{ drupalroot }} && vendor/bin/drush sql:cli"
 
 - name: Dud in fhost
-  debug: {{ ssh_key }}
+  debug: '{{ ssh_key }}'
   #shell: ssh -i {{ ssh_key }} {{ ssh_user}}:{{ fhost }} "touch test.dud"
   #delegate_to: '{{ fhost }}'
 
