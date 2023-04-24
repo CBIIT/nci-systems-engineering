@@ -10,7 +10,7 @@
   shell: touch delete.dud
 
 - name: Rsync to thost
-  shell: rsync -a web {{ thost }}:delete.dud
+  shell: rsync -a delete.dud {{ thost }}:{{ drupalroot }}/
 
 #- name: rsync the existing webdirectory against the target directory
 #  shell: rsync -a --delete --exclude web/sites/default/settings.php web {{ thost }}:{{ drupalroot }}/
