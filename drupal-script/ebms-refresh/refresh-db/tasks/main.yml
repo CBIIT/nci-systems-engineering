@@ -22,7 +22,10 @@
 #    state: present
 
 - name: Dud in fhost
-  shell: ssh -i {{ temp_ssh_key.path }} {{ sshuser }}@{{ fhost }} "touch test.dud"
+  shell: touch fhost.dud
+
+- name: Dud in thost
+  shell: ssh -i {{ temp_ssh_key.path }} {{ sshuser }}@{{ thost }} "touch thost.dud"
 
 #- name: Check the ssh env vars
 #  debug: '{{ sshuser }}'
@@ -34,8 +37,8 @@
 #    rsync_opts: "-e ssh -p 22"
 #  delegate_to: '{{ fhost }}'
 
-#- name: Rsync to thost
-#  shell: rsync -a delete.dud {{ thost }}:{{ drupalroot }}/
+- name: Rsync to thost
+  shell: rsync -a --delete -e "ssh -i {{ temp_ssh_key.path }}" thost.dud {{ sshuser }}@{{ thost }}:{{ drupalroot }}/
 
 #- name: rsync the existing webdirectory against the target directory
 #  shell: rsync -a --delete --exclude web/sites/default/settings.php web {{ thost }}:{{ drupalroot }}/
