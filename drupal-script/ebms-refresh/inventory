@@ -1,3 +1,1 @@
 #This is the host file for this server
-[all:vars]
-ansible_ssh_common_args='-o ConnectTimeout=1800'
