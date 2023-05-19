@@ -13,10 +13,10 @@
 
 - name: SQL dump from {{ fhost }} to {{ thost }}
   shell:
-    cmd: drush sql:dump | ssh -i {{ temp_ssh_key.path }} -o StrictHostKeyChecking=no {{ sshuser }}@{{ thost }} "cd {{ drupalroot }} && dzdo drush sql:cli"
-    chdir: '{{ drupalroot }}'
+    cmd: drush sql:dump | ssh -i {{ temp_ssh_key.path }} -o StrictHostKeyChecking=no {{ sshuser }}@{{ thost }} "cd {{ sqlroot }} && dzdo drush sql:cli"
+    chdir: '{{ sqlroot }}'
 
 - name: Rsync webserver from {{ fhost }} to {{ thost }}
   shell: 
-    cmd: rsync -a --delete -e "ssh -i {{ temp_ssh_key.path }}" --exclude cssi/sites/default/settings.php cssi {{ sshuser }}@{{ thost }}:{{ drupalroot }}/ --rsync-path="dzdo rsync"
+    cmd: rsync -a --delete -e "ssh -i {{ temp_ssh_key.path }}" --exclude cssi/sites/cssi/settings.php cssi {{ sshuser }}@{{ thost }}:{{ drupalroot }}/ --rsync-path="dzdo rsync"
     chdir: '{{ drupalroot }}'

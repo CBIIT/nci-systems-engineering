@@ -1,5 +1,6 @@
 drupaluser: drupal
 drupalroot: /local/drupal
+sqlroot: /local/drupal/cssi/sites/cssi
 
 #Following Vars are defined in the Jenkins Pipeline
 # fhost
