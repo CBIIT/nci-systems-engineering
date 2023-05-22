@@ -18,5 +18,5 @@
 
 - name: Rsync webserver from {{ fhost }} to {{ thost }}
   shell: 
-    cmd: rsync -a --delete -e "ssh -i {{ temp_ssh_key.path }}" --exclude cssi/sites/cssi/settings.php cssi {{ sshuser }}@{{ thost }}:{{ drupalroot }}/ --rsync-path="dzdo rsync"
+    cmd: rsync -a --delete -e "ssh -i {{ temp_ssh_key.path }}" --exclude {{ website }}/sites/{{ website }}/settings.php {{ website }} {{ sshuser }}@{{ thost }}:{{ drupalroot }}/ --rsync-path="dzdo rsync"
     chdir: '{{ drupalroot }}'
