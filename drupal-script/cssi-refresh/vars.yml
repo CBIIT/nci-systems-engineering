@@ -1,6 +1,6 @@
 drupaluser: drupal
 drupalroot: /local/drupal
-sqlroot: /local/drupal/'{{ website }}'/sites/'{{ website }}'
+sqlroot: /local/drupal/{{ website }}/sites/{{ website }}
 
 #Following Vars are defined in the Jenkins Pipeline
 # fhost
