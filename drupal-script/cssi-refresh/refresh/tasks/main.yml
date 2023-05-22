@@ -14,7 +14,7 @@
 - name: Update path for websites that use default
   set_fact:
     sqlroot: /local/drupal/{{ website }}/sites/default
-  when: website is itcr
+  when: website is 'itcr'
 
 - name: SQL dump from {{ fhost }} to {{ thost }}
   shell:
