@@ -1,0 +1,22 @@
+---
+# tasks file for refresh-db
+- include_vars: ../../vars.yml
+
+- tempfile:
+    state:  file
+    suffix: key
+  register: temp_ssh_key
+
+- copy:
+    src: '{{ sshkey }}'
+    dest: '{{ temp_ssh_key.path }}'
+
+- name: SQL dump from {{ fhost }} to {{ thost }}
+  shell:
+    cmd: drush sql:dump | ssh -i {{ temp_ssh_key.path }} -o StrictHostKeyChecking=no {{ sshuser }}@{{ thost }} "cd {{ sqlroot }} && dzdo drush sql:cli"
+    chdir: '{{ sqlroot }}'
+
+- name: Rsync webserver from {{ fhost }} to {{ thost }}
+  shell: 
+    cmd: rsync -a --delete -e "ssh -i {{ temp_ssh_key.path }}" --exclude {{ sqlroot }}/settings.php proteomics {{ sshuser }}@{{ thost }}:{{ drupalroot }}/ --rsync-path="dzdo rsync"
+    chdir: '{{ drupalroot }}'

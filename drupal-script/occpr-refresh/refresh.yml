@@ -1,0 +1,8 @@
+- name: Refresh Target Server
+  hosts: '{{ fhost }}'
+  become: yes
+  become_user: root
+  become_method: dzdo
+  gather_facts: yes
+  roles:
+   - refresh
